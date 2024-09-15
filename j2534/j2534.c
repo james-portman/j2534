@@ -1797,6 +1797,16 @@ int32_t PassThruIoctl(const unsigned long ChannelID, const unsigned long ioctlID
 
 		r = LIBUSB_SUCCESS;
 	}
+	if (ioctlID == J2534_CLEAR_MSG_FILTERS)
+	{
+		// TODO: this would be good to have
+		if (write_log)
+			writelog("[CLEAR_MSG_FILTERS]\n");
+
+		// Unsure what needs to happen here
+
+		// r = LIBUSB_SUCCESS;
+	}
 
 	EXIT_IOCTL:
 	if (write_log)
