@@ -1802,10 +1802,12 @@ int32_t PassThruIoctl(const unsigned long ChannelID, const unsigned long ioctlID
 		// TODO: this would be good to have
 		if (write_log)
 			writelog("[CLEAR_MSG_FILTERS]\n");
-
-		// Unsure what needs to happen here
-
-		// r = LIBUSB_SUCCESS;
+		// atk5 -1 4
+		// unsure what the 5 is - protocol ID? channel ID?
+		// 4 is command sequence number - seems to be optional
+		snprintf(data, MAX_LEN, "atk%lu -1\r\n", ChannelID);
+		// setting NULL for expected reply accepts an "aro" which is the norm
+		r = usb_send_expect(data, strlen(data), MAX_LEN, 2000, NULL);
 	}
 
 	EXIT_IOCTL:
